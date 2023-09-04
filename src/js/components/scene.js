@@ -53,7 +53,7 @@ class Scene {
     await LoaderManager.load(
       [
         {
-          name: 'image-1',
+          name: 'img1',
           texture: './img/image-1.jpg',
         },
       ],
@@ -67,7 +67,7 @@ class Scene {
         uTime: { value: 0 },
         uColor: { value: new Color(0.3, 0.2, 0.5) },
         uOffset: { value: this.#guiObj.offset },
-        uTexture1: { value: LoaderManager.assets['image-1']},
+        uTexture1: { value: LoaderManager.assets['img1']},
       },
     })
 
@@ -86,10 +86,12 @@ class Scene {
   handleRAF = (t) => {
     requestAnimationFrame(this.handleRAF)
 
-    this.#program.uniforms.uTime.value = t * 0.001
+    if (this.#program) {
+      this.#program.uniforms.uTime.value = t * 0.001
 
-    // Don't need a camera if camera uniforms aren't required
-    this.#renderer.render({ scene: this.#mesh })
+      // Don't need a camera if camera uniforms aren't required
+      this.#renderer.render({ scene: this.#mesh })
+    }
   }
 }
 

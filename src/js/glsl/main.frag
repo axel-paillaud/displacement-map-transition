@@ -2,7 +2,7 @@ precision highp float;
 uniform float uTime;
 uniform vec3 uColor;
 uniform float uOffset;
-unfiform sampler2D uTexture1;
+uniform sampler2D uTexture1;
 
 varying vec2 vUv;
 

@@ -7,6 +7,10 @@ class LoaderManager {
     return this.#assets[name]
   }
 
+  get assets() {
+    return this.#assets;
+  }
+
   load = (data, gl) =>
     new Promise((resolve) => {
       const promises = []
