@@ -1,5 +1,14 @@
 .scene {
-  height: 100%;
-  width: 100%;
+  width: 30%;
   position: relative;
+  aspect-ratio: 7/9;
+
+  &__container {
+    height: 100%;
+    width: 100%;
+
+    &__canvas {
+      display: block;
+    }
+  }
 }

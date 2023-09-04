@@ -28,7 +28,8 @@ class Scene {
   }
 
   setScene() {
-    const canvasEl = document.querySelector('.scene')
+    this.el = document.querySelector('.scene')
+    const canvasEl = document.querySelector('.scene__container__canvas')
     this.#renderer = new Renderer({ dpr: Math.min(window.devicePixelRatio, 2), canvas: canvasEl })
     const gl = this.#renderer.gl
     gl.clearColor(1, 1, 1, 1)
@@ -81,7 +82,7 @@ class Scene {
   }
 
   handleResize = () => {
-    this.#renderer.setSize(window.innerWidth, window.innerHeight)
+    this.#renderer.setSize(this.el.offsetWidth, this.el.offsetHeight)
   }
 
   handleRAF = (t) => {
