@@ -2,7 +2,7 @@ import GUI from 'lil-gui'
 import { Renderer, Program, Color, Mesh, Triangle } from 'ogl'
 import vertex from '@/js/glsl/main.vert'
 import fragment from '@/js/glsl/main.frag'
-// import LoaderManager from '@/js/managers/LoaderManager'
+import LoaderManager from '@/js/managers/LoaderManager'
 
 class Scene {
   #renderer
@@ -27,7 +27,7 @@ class Scene {
     gui.add(this.#guiObj, 'offset', 0.5, 4).onChange(handleChange)
   }
 
-  setScene() {
+  async setScene() {
     this.el = document.querySelector('.scene')
     const canvasEl = document.querySelector('.scene__container__canvas')
     this.#renderer = new Renderer({ dpr: Math.min(window.devicePixelRatio, 2), canvas: canvasEl })
@@ -49,19 +49,16 @@ class Scene {
 
     const geometry = new Triangle(gl)
 
-    // // To load files like textures, do :²
-    // LoaderManager.load(
-    //   [
-    //     {
-    //       name: 'matcap',
-    //       texture: './img/matcap.png',
-    //     },
-    //   ],
-    //   gl
-    // ).then(() => {
-    //   // do something
-    //   console.log(LoaderManager.assets)
-    // })
+    // To load files like textures, do :
+    await LoaderManager.load(
+      [
+        {
+          name: 'image-1',
+          texture: './img/image-1.jpg',
+        },
+      ],
+      gl
+    )
 
     this.#program = new Program(gl, {
       vertex,
@@ -70,6 +67,7 @@ class Scene {
         uTime: { value: 0 },
         uColor: { value: new Color(0.3, 0.2, 0.5) },
         uOffset: { value: this.#guiObj.offset },
+        uTexture1: { value: LoaderManager.assets['image-1']},
       },
     })
 
