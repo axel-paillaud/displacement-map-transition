@@ -3,6 +3,7 @@ import { Renderer, Program, Color, Mesh, Triangle } from 'ogl'
 import vertex from '@/js/glsl/main.vert'
 import fragment from '@/js/glsl/main.frag'
 import LoaderManager from '@/js/managers/LoaderManager'
+import { getCoverUV } from '../utils/ogl';
 
 class Scene {
   #renderer
@@ -59,6 +60,8 @@ class Scene {
       ],
       gl
     )
+
+    const uvCover1 = getCoverUV(gl, LoaderManager.assets['img1'].image);
 
     this.#program = new Program(gl, {
       vertex,
