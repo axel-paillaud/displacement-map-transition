@@ -71,6 +71,8 @@ class Scene {
         uColor: { value: new Color(0.3, 0.2, 0.5) },
         uOffset: { value: this.#guiObj.offset },
         uTexture1: { value: LoaderManager.assets['img1']},
+        uRepeat1: { value: uvCover1.repeat},
+        uOffset1: { value: uvCover1.offset}
       },
     })
 
