@@ -22,5 +22,9 @@ void main() {
   vec2 uvDisplaced1 = vec2(vUvMap1.x + displaceForce1, vUvMap1.y + displaceForce1);
   vec4 displacedTexture1 = texture2D(uTexture1, uvDisplaced1);
 
-  gl_FragColor = displacedTexture1;
+  float displaceForce2 = displacementTexture.r * ( 1. - uOffset ) * displacementCoef;
+  vec2 uvDisplaced2 = vec2(vUvMap2.x - displaceForce2, vUvMap2.y - displaceForce2);
+  vec4 displacedTexture2 = texture2D(uTexture2, uvDisplaced2);
+
+  gl_FragColor = displacedTexture2;
 }
