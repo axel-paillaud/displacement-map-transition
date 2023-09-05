@@ -10,11 +10,17 @@ varying vec2 vUv;
 varying vec2 vUvMap1;
 varying vec2 vUvMap2;
 
-void main() {
-  vec4 texture1 = texture2D(uTexture1, vUvMap1);
-  vec4 texture2 = texture2D(uTexture2, vUvMap2);
+const float displacementCoef = 0.4;
 
+void main() {
+/*   vec4 texture1 = texture2D(uTexture1, vUvMap1);
+  vec4 texture2 = texture2D(uTexture2, vUvMap2); */
   vec4 displacementTexture = texture2D(uDisplacementTexture, vUv);
 
-  gl_FragColor = displacementTexture;
+  // get displacement force based of one color canal of the image, then use uProgram
+  float displaceForce1 = displacementTexture.r * uOffset * displacementCoef;
+  vec2 uvDisplaced1 = vec2(vUvMap1.x + displaceForce1, vUvMap1.y + displaceForce1);
+  vec4 displacedTexture1 = texture2D(uTexture1, uvDisplaced1);
+
+  gl_FragColor = displacedTexture1;
 }

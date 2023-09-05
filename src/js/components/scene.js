@@ -25,7 +25,7 @@ class Scene {
       this.#program.uniforms.uOffset.value = value
     }
 
-    gui.add(this.#guiObj, 'offset', 0.5, 4).onChange(handleChange)
+    gui.add(this.#guiObj, 'offset', 0, 1).onChange(handleChange)
   }
 
   async setScene() {
