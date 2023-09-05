@@ -57,11 +57,20 @@ class Scene {
           name: 'img1',
           texture: './img/image-1.jpg',
         },
+        {
+          name: 'img2',
+          texture: './img/image-2.jpg',
+        },
+        {
+          name: 'displacement-map',
+          texture: './img/displacement-map.jpg',
+        },
       ],
       gl
     )
 
     const uvCover1 = getCoverUV(gl, LoaderManager.assets['img1'].image);
+    const uvCover2 = getCoverUV(gl, LoaderManager.assets['img2'].image);
 
     this.#program = new Program(gl, {
       vertex,
@@ -71,8 +80,13 @@ class Scene {
         uColor: { value: new Color(0.3, 0.2, 0.5) },
         uOffset: { value: this.#guiObj.offset },
         uTexture1: { value: LoaderManager.assets['img1']},
-        uRepeat1: { value: uvCover1.repeat},
-        uOffset1: { value: uvCover1.offset}
+        uvRepeat1: { value: uvCover1.repeat},
+        uvOffset1: { value: uvCover1.offset},
+        uTexture2: { value: LoaderManager.assets['img2']},
+        uvRepeat2: { value: uvCover2.repeat},
+        uvOffset2: { value: uvCover2.offset},
+        uDisplacementTexture: { value: LoaderManager.assets['displacement-map']},
+
       },
     })
 
