@@ -4,6 +4,7 @@ import vertex from '@/js/glsl/main.vert'
 import fragment from '@/js/glsl/main.frag'
 import LoaderManager from '@/js/managers/LoaderManager'
 import { getCoverUV } from '../utils/ogl';
+import { gsap } from 'gsap'
 
 class Scene {
   #renderer
@@ -94,8 +95,29 @@ class Scene {
   }
 
   events() {
-    window.addEventListener('resize', this.handleResize, false)
-    requestAnimationFrame(this.handleRAF)
+    window.addEventListener('resize', this.handleResize, false);
+    requestAnimationFrame(this.handleRAF);
+
+    const { gl } = this.#renderer;
+
+    gl.canvas.addEventListener('mouseenter', this.handleMouseenter);
+    gl.canvas.addEventListener('mouseleave', this.handleMouseleave);
+  }
+
+  handleMouseenter = () => {
+    gsap.fromTo(
+      this.#program.uniforms.uOffset,
+      { value: 0 },
+      { value: 1, duration: 1.1, ease: 'expo.out'}
+    )
+  }
+
+  handleMouseleave = () => {
+    gsap.fromTo(
+      this.#program.uniforms.uOffset,
+      { value: 1 },
+      { value: 0, duration: 1.1, ease: 'expo.out'}
+    )
   }
 
   handleResize = () => {
